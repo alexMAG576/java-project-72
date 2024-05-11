@@ -20,6 +20,6 @@ public class App {
     }
     public static void main(String[] args) throws SQLException, IOException {
         Javalin app = getApp();
-        app.start(7070);
+        app.start(5432);
     }
 }
