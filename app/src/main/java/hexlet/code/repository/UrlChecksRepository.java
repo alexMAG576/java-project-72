@@ -8,10 +8,11 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Optional;
 
-import hexlet.code.model.Url;
 import hexlet.code.model.UrlCheck;
+import hexlet.code.model.Url;
 
 public class UrlChecksRepository extends BaseRepository {
+
     public static void saveCheck(UrlCheck check) throws SQLException {
         String sql = "INSERT INTO url_checks (url_id, status_code, title, h1, description, created_at)"
                 + "VALUES (?, ?, ?, ?, ?, ?)";
@@ -79,8 +80,28 @@ public class UrlChecksRepository extends BaseRepository {
         }
     }
 
-    public static LinkedHashMap<Url, UrlCheck> getUrlsWithLastChecks() throws SQLException {
-        var urls = UrlsRepository.getEntities();
+    public static LinkedHashMap<Url, UrlCheck> getUrlsWithLastChecks() throws SQLException{
+       LinkedHashMap<Url, UrlCheck> outputMap = new LinkedHashMap<>();
+       var connection = dataSource.getConnection();
+
+       try (Statement statement = connection.createStatement();
+            var resultSet = statement.executeQuery("SELECT DISTINCT ON (url_id) * FROM url_checks ORDER BY url_id DESC, id DESC")) {
+
+           while (resultSet.next()) {
+               Url url = new Url(resultSet.getString("url"));
+               UrlCheck urlCheck = new UrlCheck(resultSet.getLong("id"), resultSet.getInt("status_code"), resultSet.getString("title"), resultSet.getString("h1"), resultSet.getString("description"));
+               var createdAt = resultSet.getTimestamp("created_at");
+               urlCheck.setCreatedAt(createdAt);
+               outputMap.put(url, urlCheck);
+           }
+       }
+
+       return outputMap;
+    }
+
+
+    /*public static LinkedHashMap<Url, UrlCheck> getUrlsWithLastChecks() throws SQLException {
+        var urls =  UrlsRepository.getEntities(); // "SELECT DISTINCT ON (url_id) * FROM url_checks ORDER BY url_id DESC, id DESC\n";
         LinkedHashMap<Url, UrlCheck> outputMap = new LinkedHashMap<>();
         urls.stream()
                 .peek(u -> {
@@ -92,6 +113,6 @@ public class UrlChecksRepository extends BaseRepository {
                     }
                 }).toList();
         return outputMap;
-    }
+    }*/
 
 }
