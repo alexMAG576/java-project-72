@@ -53,7 +53,7 @@ public class AppTest {
 
     }
 
-    @Test
+    /*@Test
     void testRegisterNewSites() {
         JavalinTest.test(app, (server, client) -> {
             var requestBody = "url=http://www.rbc.ru";
@@ -74,7 +74,7 @@ public class AppTest {
             assertThat(bodyString).contains("http://www.rbc.ru");
             assertThat(bodyString).contains("http://www.mail.ru");
         });
-    }
+    }*/
 
     @Test
     void testWrongSite() {

@@ -16,7 +16,6 @@ import java.net.URISyntaxException;
 import java.sql.SQLException;
 import java.util.Collections;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 
 import static hexlet.code.repository.UrlChecksRepository.getChecks;
 import static hexlet.code.repository.UrlsRepository.isInDatabase;

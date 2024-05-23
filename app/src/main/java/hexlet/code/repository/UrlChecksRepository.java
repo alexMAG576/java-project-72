@@ -80,11 +80,12 @@ public class UrlChecksRepository extends BaseRepository {
         }
     }
 
-    public static LinkedHashMap<Url, UrlCheck> getUrlsWithLastChecks() throws SQLException{
+    public static LinkedHashMap<Url, UrlCheck> getUrlsWithLastChecks() throws SQLException {
        LinkedHashMap<Url, UrlCheck> outputMap = new LinkedHashMap<>();
-       var connection = dataSource.getConnection();
 
-       try (Statement statement = connection.createStatement();
+
+       try (var connection = dataSource.getConnection();
+            var statement = connection.createStatement();
             var resultSet = statement.executeQuery("SELECT DISTINCT ON (url_id) * FROM url_checks ORDER BY url_id DESC, id DESC")) {
 
            while (resultSet.next()) {
