@@ -5,6 +5,7 @@ import hexlet.code.repository.UrlChecksRepository;
 import hexlet.code.repository.UrlsRepository;
 import hexlet.code.util.NamedRoutes;
 import io.javalin.Javalin;
+import io.javalin.http.NotFoundResponse;
 import io.javalin.testtools.JavalinTest;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
@@ -14,9 +15,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Objects;
 
 import static hexlet.code.util.Utils.readResourceFile;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -53,9 +56,9 @@ public class AppTest {
 
     }
 
-    /*@Test
+    @Test
     void testRegisterNewSites() {
-        JavalinTest.test(app, (server, client) -> {
+        /*JavalinTest.test(app, (server, client) -> {
             var requestBody = "url=http://www.rbc.ru";
             client.post(NamedRoutes.urlsPath(), requestBody);
             requestBody = "url=http://www.mail.ru";
@@ -73,8 +76,8 @@ public class AppTest {
             assertThat(bodyString).contains("Сайты");
             assertThat(bodyString).contains("http://www.rbc.ru");
             assertThat(bodyString).contains("http://www.mail.ru");
-        });
-    }*/
+        });*/
+    }
 
     @Test
     void testWrongSite() {

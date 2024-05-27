@@ -82,11 +82,11 @@ public class UrlChecksRepository extends BaseRepository {
 
     public static LinkedHashMap<Url, UrlCheck> getUrlsWithLastChecks() throws SQLException {
        LinkedHashMap<Url, UrlCheck> outputMap = new LinkedHashMap<>();
-
+       var sql = "SELECT DISTINCT ON (url_id) * FROM url_checks ORDER BY url_id DESC, id DESC";
 
        try (var connection = dataSource.getConnection();
             var statement = connection.createStatement();
-            var resultSet = statement.executeQuery("SELECT DISTINCT ON (url_id) * FROM url_checks ORDER BY url_id DESC, id DESC")) {
+            var resultSet = statement.executeQuery(sql)) {
 
            while (resultSet.next()) {
                Url url = new Url(resultSet.getString("url"));
@@ -96,7 +96,6 @@ public class UrlChecksRepository extends BaseRepository {
                outputMap.put(url, urlCheck);
            }
        }
-
        return outputMap;
     }
 
