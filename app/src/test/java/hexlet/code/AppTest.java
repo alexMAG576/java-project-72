@@ -74,8 +74,8 @@ public class AppTest {
             assertEquals("http://www.mail.ru",
                     UrlsRepository.findByName("http://www.mail.ru").get().getName());
             assertThat(bodyString).contains("Сайты");
-            //assertThat(bodyString).contains("http://www.rbc.ru");
-            //assertThat(bodyString).contains("http://www.mail.ru");
+            assertThat(bodyString).contains("http://www.rbc.ru");
+            assertThat(bodyString).contains("http://www.mail.ru");
         });
     }
 
