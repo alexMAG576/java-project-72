@@ -82,29 +82,29 @@ public class UrlChecksRepository extends BaseRepository {
     }
 
     public static LinkedHashMap<Url, UrlCheck> getUrlsWithLastChecks() throws SQLException {
-       var sql = "SELECT DISTINCT ON (url_id) * FROM url_checks ORDER BY url_id DESC, id DESC";
+        var sql = "SELECT DISTINCT ON (url_id) * FROM url_checks ORDER BY url_id DESC, id DESC";
         LinkedHashMap<Url, UrlCheck> outputMap = new LinkedHashMap<>();
-       try (var connection = dataSource.getConnection();
+        try (var connection = dataSource.getConnection();
             var statement = connection.createStatement();
-           var resultSet = statement.executeQuery(sql)) {
-           while (resultSet.next()) {
-               Url url = new Url(resultSet.getString("url"));
-               UrlCheck urlCheck = new UrlCheck(resultSet.getLong("id"),
+            var resultSet = statement.executeQuery(sql)) {
+            while (resultSet.next()) {
+                Url url = new Url(resultSet.getString("url"));
+                UrlCheck urlCheck = new UrlCheck(resultSet.getLong("id"),
                        resultSet.getInt("status_code"),
                        resultSet.getString("title"),
                        resultSet.getString("h1"),
                        resultSet.getString("description"));
-               var createdAt = resultSet.getTimestamp("created_at");
-               urlCheck.setCreatedAt(createdAt);
-               outputMap.put(url, urlCheck);
-           }
-       }
-       return outputMap;
+                var createdAt = resultSet.getTimestamp("created_at");
+                urlCheck.setCreatedAt(createdAt);
+                outputMap.put(url, urlCheck);
+            }
+        }
+        return outputMap;
     }
 
 
     /*public static LinkedHashMap<Url, UrlCheck> getUrlsWithLastChecks() throws SQLException {
-        var urls =  UrlsRepository.getEntities(); // "SELECT DISTINCT ON (url_id) * FROM url_checks ORDER BY url_id DESC, id DESC\n";
+        var urls =  UrlsRepository.getEntities();
         LinkedHashMap<Url, UrlCheck> outputMap = new LinkedHashMap<>();
         urls.stream()
                 .peek(u -> {
