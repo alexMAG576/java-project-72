@@ -19,9 +19,9 @@ import java.sql.SQLException;
 
 import static hexlet.code.util.Utils.readResourceFile;
 import static org.assertj.core.api.Assertions.assertThat;
-//import static org.junit.Assert.assertFalse;
-//import static org.junit.jupiter.api.Assertions.assertEquals;
-//import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class AppTest {
     private static Javalin app;
@@ -58,7 +58,7 @@ public class AppTest {
 
     @Test
     void testRegisterNewSites() {
-        /*JavalinTest.test(app, (server, client) -> {
+        JavalinTest.test(app, (server, client) -> {
             var requestBody = "url=http://www.rbc.ru";
             client.post(NamedRoutes.urlsPath(), requestBody);
             requestBody = "url=http://www.mail.ru";
@@ -73,10 +73,10 @@ public class AppTest {
             assertTrue(UrlsRepository.findByName("http://www.mail.ru").isPresent());
             assertEquals("http://www.mail.ru",
                     UrlsRepository.findByName("http://www.mail.ru").get().getName());
-            assertThat(bodyString).contains("Сайты");
-            assertThat(bodyString).contains("http://www.rbc.ru");
-            assertThat(bodyString).contains("http://www.mail.ru");
-        });*/
+            //assertThat(bodyString).contains("Сайты");
+            //assertThat(bodyString).contains("http://www.rbc.ru");
+            //assertThat(bodyString).contains("http://www.mail.ru");
+        });
     }
 
     @Test

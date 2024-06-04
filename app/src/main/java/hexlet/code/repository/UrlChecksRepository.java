@@ -4,12 +4,13 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.Optional;
+import java.util.*;
 
 import hexlet.code.model.UrlCheck;
 import hexlet.code.model.Url;
+import hexlet.code.util.NamedRoutes;
+import io.javalin.Javalin;
+import io.javalin.testtools.JavalinTest;
 
 public class UrlChecksRepository extends BaseRepository {
 
@@ -81,16 +82,18 @@ public class UrlChecksRepository extends BaseRepository {
     }
 
     public static LinkedHashMap<Url, UrlCheck> getUrlsWithLastChecks() throws SQLException {
-       LinkedHashMap<Url, UrlCheck> outputMap = new LinkedHashMap<>();
        var sql = "SELECT DISTINCT ON (url_id) * FROM url_checks ORDER BY url_id DESC, id DESC";
-
+        LinkedHashMap<Url, UrlCheck> outputMap = new LinkedHashMap<>();
        try (var connection = dataSource.getConnection();
             var statement = connection.createStatement();
-            var resultSet = statement.executeQuery(sql)) {
-
+           var resultSet = statement.executeQuery(sql)) {
            while (resultSet.next()) {
                Url url = new Url(resultSet.getString("url"));
-               UrlCheck urlCheck = new UrlCheck(resultSet.getLong("id"), resultSet.getInt("status_code"), resultSet.getString("title"), resultSet.getString("h1"), resultSet.getString("description"));
+               UrlCheck urlCheck = new UrlCheck(resultSet.getLong("id"),
+                       resultSet.getInt("status_code"),
+                       resultSet.getString("title"),
+                       resultSet.getString("h1"),
+                       resultSet.getString("description"));
                var createdAt = resultSet.getTimestamp("created_at");
                urlCheck.setCreatedAt(createdAt);
                outputMap.put(url, urlCheck);
@@ -116,3 +119,5 @@ public class UrlChecksRepository extends BaseRepository {
     }*/
 
 }
+
+
