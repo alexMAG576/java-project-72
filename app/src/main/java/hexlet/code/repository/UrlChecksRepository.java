@@ -4,13 +4,14 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.util.*;
-
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.Optional;
 import hexlet.code.model.UrlCheck;
 import hexlet.code.model.Url;
-import hexlet.code.util.NamedRoutes;
-import io.javalin.Javalin;
-import io.javalin.testtools.JavalinTest;
+//import hexlet.code.util.NamedRoutes;
+//import io.javalin.Javalin;
+//import io.javalin.testtools.JavalinTest;
 
 public class UrlChecksRepository extends BaseRepository {
 
