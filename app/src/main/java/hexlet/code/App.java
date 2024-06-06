@@ -71,7 +71,11 @@ public class App {
 
         initializeDB(dataSource);
 
-        var app = Javalin.create(config -> config.plugins.enableDevLogging());
+        //var app = Javalin.create(config -> config.plugins.enableDevLogging());
+        var app = Javalin.create(config -> {
+            config.plugins.enableDevLogging();
+            config.fileRenderer(new JavalinJte(createTemplateEngine()));
+        });
 
         registerPaths(app);
 

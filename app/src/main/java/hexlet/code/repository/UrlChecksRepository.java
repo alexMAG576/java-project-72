@@ -82,7 +82,7 @@ public class UrlChecksRepository extends BaseRepository {
         }
     }
 
-   /* public static LinkedHashMap<Url, UrlCheck> getUrlsWithLastChecks() throws SQLException {
+   public static LinkedHashMap<Url, UrlCheck> getUrlsWithLastChecks() throws SQLException {
         var sql = "SELECT DISTINCT ON (url_id) * FROM url_checks ORDER BY url_id DESC, id DESC";
         LinkedHashMap<Url, UrlCheck> outputMap = new LinkedHashMap<>();
         try (var connection = dataSource.getConnection();
@@ -101,10 +101,10 @@ public class UrlChecksRepository extends BaseRepository {
             }
         }
         return outputMap;
-    }*/
+    }
 
 
-    public static LinkedHashMap<Url, UrlCheck> getUrlsWithLastChecks() throws SQLException {
+    /*public static LinkedHashMap<Url, UrlCheck> getUrlsWithLastChecks() throws SQLException {
         var urls =  UrlsRepository.getEntities();
         LinkedHashMap<Url, UrlCheck> outputMap = new LinkedHashMap<>();
         urls.stream()
@@ -117,7 +117,7 @@ public class UrlChecksRepository extends BaseRepository {
                     }
                 }).toList();
         return outputMap;
-    }
+    }*/
 }
 
 
